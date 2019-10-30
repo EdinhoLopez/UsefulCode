@@ -1,0 +1,8 @@
+//Use RequestDispatcher in order to call another file such as a jsp or servlet
+//Dont forget to also forward the request and response objects
+
+RequestDispatcher rd = request.getRequestDispatcher("index.jsp");  
+		
+rd.forward(request, response);
+
+
