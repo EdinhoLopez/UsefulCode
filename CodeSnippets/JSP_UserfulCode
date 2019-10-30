@@ -1,0 +1,14 @@
+<!--Standard form with username and password-->
+<!--Calls on the servlet Home once the submit button is pressed-->
+
+<form action="Home" method="post">
+
+<p>Username: <input type="text" name="username"></p>
+
+<p>Password: <input type="text" name="password"></p>
+</br>
+<input type="submit" name="logIn">
+
+</form>
+
+-------------------------------------------------------------------------------------
