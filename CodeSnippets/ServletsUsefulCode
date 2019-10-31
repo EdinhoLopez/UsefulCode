@@ -5,4 +5,37 @@ RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 		
 rd.forward(request, response);
 
+-----------------------------------------------------------------------------------------
+//Being able to store objects and values within the request object
+/*Remember that the request object has to be forwarded to the JSP (through RequestDispatcher)
+in order for the JSP to be able to access the attributes of that request
+*/
+
+//Stores an ArrayList named "courses" in the request object. To retrieve it make sure to use its key "courseList"
+
+request.setAttribute("courseList", courses);
+
+//In a scriplet you are able to retrieve these objects and variables through the use of the request object
+//Make sure to just convert what is given by the .getAttribute() method to the right type
+
+ArrayList<Course> list = (ArrayList<Course>) request.getAttribute("courseList");
+
+------------------------------------------------------------------------------------------
+//Being able to store objects and values within the session object
+/*Remember that the session has a higher scope meaning that all JSPs
+  and servlets share the same session
+*/
+
+//Create the session object that will be used:
+
+HttpSession session = request.getSession(true);
+
+//Stores an ArrayList named "courses" in the session object. To retrieve it make sure to use its key "courseList"
+
+session.setAttribute("courseList", courses);
+
+//In a scriplet you are able to retrieve these objects and variables through the use of the request object
+//Make sure to just convert what is given by the .getAttribute() method to the right type
+
+ArrayList<Course> list = (ArrayList<Course>) session.getAttribute("courseList");
 
