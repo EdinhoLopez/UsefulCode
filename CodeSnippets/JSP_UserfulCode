@@ -12,3 +12,34 @@
 </form>
 
 -------------------------------------------------------------------------------------
+<!--Program that uses a scriplet to get the current date and time.-->
+<!--The date and time are then displayed to the page by using expressions-->
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<%@page import="java.time.LocalDate,java.time.LocalDateTime,java.time.format.DateTimeFormatter" %>
+
+<% DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+	LocalDateTime now = LocalDateTime.now();  
+	String rn = dtf.format(now);
+	
+	String currentDate = rn.split(" ")[0];
+	String currentTime = rn.split(" ")[1];
+%>
+
+
+</head>
+<body>
+
+<h1>Hello dude! Today is <%=currentDate %> Time is <%=currentTime %></h1>
+
+</body>
+</html>
+
+-------------------------------------------------------------------------------------
