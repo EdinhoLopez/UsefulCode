@@ -43,3 +43,25 @@
 </html>
 
 -------------------------------------------------------------------------------------
+//You are able to dynamically create new HTML code through the use of JPS and scriplets
+
+<table>
+<tr>
+    <th>Courses</th>
+</tr>
+
+<!--Creates the arraylist that will be printed out.-->
+<% ArrayList<Course> list = (ArrayList<Course>) session.getAttribute("courses");
+		
+		//Closes the scriplet in order to allow us to write HTML again
+		for (Course s : list) {%>
+			<!--HTML inside the loop-->
+			<tr>
+    			<td><%= s.getName() %></td>
+  			</tr>	
+			
+		<%} %>		
+</table>
+
+
+
