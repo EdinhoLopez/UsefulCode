@@ -63,5 +63,19 @@
 		<%} %>		
 </table>
 
+-------------------------------------------------------------------------------------------
+<!--You are able to get the contextPath of any servlet regardless of the package it is in.-->
+
+<a href="${pageContext.request.contextPath}/HomeServlet">Welcome Page</a>
+
+------------------------------------------------------------------------------------------
+<!--You can include the code inside another file inside a JSP by this directive-->
+
+<%@ include file="Navigation.html" %>
+
+------------------------------------------------------------------------------------------
+
+
+
 
 
