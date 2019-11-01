@@ -1,0 +1,36 @@
+//Class which helps me connect to a MariaDB database.
+//Make sure to have a db.properties file inside a properties package with all your properties.
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class MariaDBConnection {
+	public Connection getConnection() throws ClassNotFoundException,
+	IOException, SQLException {
+	final Properties prop = new Properties();
+	final InputStream inputStream = MariaDBConnection.class.getClassLoader()
+			.getResourceAsStream(
+					"properties/db.properties");
+	prop.load(inputStream);
+	Class.forName(prop.getProperty("driver"));
+	final Connection connection =
+			DriverManager.getConnection(prop.getProperty("url"),
+			prop.getProperty("user"), prop.getProperty("password"));
+	return connection;
+	}
+}
+
+------------------------------------------------------------------------------------------------------
+//File that holds all my properties used to access a database
+//Make sure you change the log in information, port number and the name of the database as needed
+
+driver=org.mariadb.jdbc.Driver
+url=jdbc:mariadb://localhost:1234/junitexam?serverTimezone=UTC&createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+user=root
+password=root
+
+
