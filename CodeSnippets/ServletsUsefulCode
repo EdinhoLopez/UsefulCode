@@ -2,8 +2,12 @@
 //Dont forget to also forward the request and response objects
 
 RequestDispatcher rd = request.getRequestDispatcher("index.jsp");  
-		
+
 rd.forward(request, response);
+
+//Alternative if you have your JSP inside a folder within WEB-INF
+
+RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/test.jsp");
 
 -----------------------------------------------------------------------------------------
 //Being able to store objects and values within the request object
