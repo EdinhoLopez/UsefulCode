@@ -143,4 +143,10 @@ public class HomeServlet extends HttpServlet {
 
 <a href="${pageContext.request.contextPath}/HomeServlet/securePage">Secure Page</a>
 
+//If you want to call the controller from a form in your JSP then use this code:
+//Your form will call a specific case within the switch statement of the controller which will then call another method
+
+<form action="${pageContext.request.contextPath}/HomeServlet/verifySignIn">
+
+-------------------------------------------------------------------------------------------------------------
 
