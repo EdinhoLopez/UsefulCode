@@ -74,8 +74,10 @@
 <%@ include file="Navigation.html" %>
 
 ------------------------------------------------------------------------------------------
+<!-- Make sure to have your css folder inside WebContent but outside WEB-INF-->
+<!--How to insert css to your jsps-->
 
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Index.css">
 
 
 
