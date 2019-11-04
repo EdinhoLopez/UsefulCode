@@ -39,3 +39,22 @@ session.setAttribute("courseList", courses);
 
 ArrayList<Course> list = (ArrayList<Course>) session.getAttribute("courseList");
 
+----------------------------------------------------------------------------------------------------------------------------------
+
+//You are able to use cookies in order to keep track of values between JSPs and Servlets
+//Defining and adding a cookie object to the response object of the servlet
+
+Cookie testCookie = new Cookie("favoriteCookie","NewCookie");
+response.addCookie(testCookie);
+
+//You are able to then retrieve the value of the cookie through the JSP
+//Use expression language to access the implicit cookie object
+
+<h1>Here is the Cookie value: ${cookie.favoriteCookie.value }</h1>
+
+//Remember that you are able to access the cookie object from any JSP thus having a scope similar to session
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+
