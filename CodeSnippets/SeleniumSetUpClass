@@ -1,0 +1,93 @@
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import org.hamcrest.text.IsEqualIgnoringCase;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SeleniumBasicTest {
+
+	private static WebDriver driver;
+	@BeforeClass
+	public static void setUp() {
+		/***************************/
+		//Make sure you know the location of your chrome driver!!!!!!!!
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Student\\Desktop\\chromeDriver\\chromedriver.exe");
+				
+		driver = new ChromeDriver();
+		
+		//Sets the webpage that is inside the driver
+		driver.get("https://perscholas.org/");
+	}
+	
+	//Closes the webpage after completing all tests
+	@AfterClass
+	public static void shutDown() {
+		driver.close();
+	}
+	
+	//Asserts whether the title is the same as the expected
+	@Test
+	public void testTitle() {
+		
+		String pageTitle = driver.getTitle();
+		assertThat(pageTitle,is("Per Scholas"));
+		
+		WebElement b1 = driver.findElement(By.cssSelector("#main > div > div > div > div > h1"));
+	
+		String input = b1.getText();
+		
+		assertThat(input,IsEqualIgnoringCase.equalToIgnoringCase("Technology at work"));
+		
+	}
+	
+	//Finds the menu at the top by the navbar and puts it in a WebElement
+	//The webElement is then clicked
+	@Test
+	public void testMenu() {
+		
+		WebElement menu = driver.findElement(By.cssSelector("#header > nav.subNav.navbar.navbar-default.affix-top > div > div.hidden-xs > ul > li:nth-child(1) > a"));
+		
+		menu.click();
+		
+	}
+	
+	//Sets the webpage through the driver
+	//Gets the search bar and puts it in a WebElement. 
+	//Puts text inside the search bar and presses enter
+	@Test
+	public void inputPage() {
+		
+		driver.get("https://www.google.com/");
+		
+		WebElement findE = driver.findElement(By.name("q"));
+		
+		findE.sendKeys("Selenium jobs\n");
+		
+		//findE.sendKeys(Keys.ENTER);
+		
+	}
+	
+	
+
+}
+
+/*********************************************************************************************************/
+//Maven dependency that must be included in your pom file in order to use selenium!
+
+<dependency>
+  <groupId>org.seleniumhq.selenium</groupId>
+  <artifactId>selenium-java</artifactId>
+  <version>3.141.59</version>
+	</dependency>
+
+
+
+
