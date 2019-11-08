@@ -1,0 +1,25 @@
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class HomeController {
+	
+	//Path that will be displayed in the URL to call this method
+	//Default- Meaning that it will run first when you run the app
+	@RequestMapping("/")
+	public String showHelloPage() {
+		
+		//Name of JSP that will be called
+		return "Hello";
+		
+	}
+	
+	@RequestMapping("/HelloQE")
+	public String showHelloQEPage() {
+		
+		return "HelloQE";
+		
+	}
+	
+
+}
