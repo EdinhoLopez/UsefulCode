@@ -79,5 +79,11 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Index.css">
 
+------------------------------------------------------------------------------------------------
+*************SPRING MVC************************************************
+<!--You are able to call a method inside the SpringMVC controller by merely calling the name inside the requestMapping
+
+<a href="${pageContext.request.contextPath}/loginUser" >Log In</a>
+
 
 
