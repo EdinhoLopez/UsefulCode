@@ -1,0 +1,11 @@
+//You are able to get parameters from a JPS page in SpringMVC by using the @RequestParam annotation. In your JSP form remember to call this 
+//method when the form is submitted. Then you need to make sure the name of the String variable (i.e. String username) is the same as the
+//name given to the input in the JPS page.
+
+@RequestMapping("/verifyUser")
+	public String loginUser(@RequestParam String username, @RequestParam String password) {
+		
+		System.out.println("name: " + username + " password: " + password);
+		
+		return "Welcome";
+	}
