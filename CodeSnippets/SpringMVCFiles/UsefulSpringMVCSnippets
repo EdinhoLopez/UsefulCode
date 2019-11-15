@@ -9,3 +9,34 @@
 		
 		return "Welcome";
 	}
+	
+------------------------------------------------------------------------------------------------------------------
+
+//You are able to pass on values from one JSP to another through the use of the SpringMVC controller. You need to use @RequestParam
+//in order to get the value from a JPS page and then you have to use ModelMap in order to pass on the value. You access the value of the 
+//JSP by using expression language and directly referencing the variable by name
+
+@RequestMapping("/makeContact")
+public String makeContact(@RequestParam String contactName,ModelMap model) {
+		
+	model.addAttribute("username",contactName);
+		
+	return "aboutMe";
+		
+}
+
+//Alternatively you can also include both the name of the JPS to be called and the value you want to pass on by using ModelAndView like so
+//These two methods will do the same thing. One will add a value to the model and then send it back returning a String. The other
+//uses the ModelAndView object to send both together.
+
+
+@RequestMapping("/makeContact")
+public ModelAndView makeContact(@RequestParam String contactName) {
+		
+	return new ModelAndView("aboutMe","username",contactName);
+		
+}
+
+
+---------------------------------------------------------------------------------------------------------------------
+
