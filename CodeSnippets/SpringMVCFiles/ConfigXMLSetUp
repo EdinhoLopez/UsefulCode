@@ -1,0 +1,52 @@
+//You will need to have a web.xml file and an additional xml file called dispatcher-servlet.xml to set up the configuration using XML
+
+//This is dispatcher-servlet. It is to be located inside your WEB-INF folder
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns ="http://www.springframework.org/schema/beans"
+	xmlns:context = "http://www.springframework.org/schema/context"
+	xmlns:mvc = "http://www.springframework.org/schema/mvc"
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation = "
+		http://www.springframework.org/schema/beans 
+		https://www.springframework.org/schema/beans/spring-beans.xsd 
+                http://www.springframework.org/schema/context
+		https://www.springframework.org/schema/context/spring-context.xsd">
+		
+		<!-- Change to whatever package will hold your controllers!!!!!! -->
+		<context:component-scan base-package="xmlServlets" />
+		
+		<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<property name = "prefix" value = "/WEB-INF/views/" />
+			<property name = "suffix" value = ".jsp" />
+		</bean>
+		
+</beans>
+
+---------------------------------------------------------------------------------------------------------------
+
+//This will set up your web.xml file. Make sure to only paste the servlet definition and its mapping
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>FirstSpringMVCProject</display-name>
+ 	
+ 	<servlet>
+ 	
+ 		<servlet-name>dispatcher</servlet-name>
+ 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+ 	
+ 	</servlet>
+ 	
+ 	<servlet-mapping>
+ 	
+ 	<servlet-name>dispatcher</servlet-name>
+ 	
+ 		<url-pattern></url-pattern>
+ 	
+ 	</servlet-mapping>
+ 
+ 
+</web-app>
+
