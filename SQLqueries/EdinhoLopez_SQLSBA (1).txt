@@ -1,0 +1,207 @@
+/*Apply the Alter statements*/
+/*Part 3 sectin A. Add a column named EndDate of type
+Date and a column named Credits of type INT.*/ 
+
+ALTER TABLE StudentCourse
+ADD EndDate Date;
+ALTER TABLE StudentCourse
+ADD Credits INT;
+
+/*Part 3 section B. Add NOT NULL constraint to the column EndDate. */
+
+ALTER TABLE studentcourse 
+CHANGE enddate enddate DATE NOT NULL;
+
+/*Part 3 section C. Modify the name of the field EndDate to FinishDate.*/
+
+ALTER TABLE `studentCourse` CHANGE COLUMN `EndDate` FinishDate Date;
+
+/*Part 3 section D. Write a query to remove the columns FinishDate
+ and Credits from the StudentCourse table.*/
+ 
+ALTER TABLE StudentCourse
+DROP COLUMN FinishDate;
+
+ALTER TABLE StudentCourse
+DROP COLUMN Credits;
+
+/*Step 4:  Write queries that return the following result sets:*/
+
+/*Step 4 Part A*/
+
+select department.name as 'Department Name',
+count(course.deptId) as '#Courses'
+from department
+join course
+on department.id = course.deptId
+group by course.deptId
+order by count(course.deptId) ASC;
+
+/*Step 4 Part B*/
+
+select course.name as 'Course Name', 
+count(studentCourse.courseid) as '# of Students'
+from course
+join studentCourse
+on course.id = studentCourse.courseid
+group by studentCourse.courseid
+order by count(studentCourse.courseid) DESC;
+
+/*Part C*/
+
+select course.name
+from facultycourse
+right join course
+on facultycourse.courseId = course.id
+where facultycourse.courseId is null
+order by course.name ASC;
+
+/*Part C Part 2*/
+
+select course.name as 'NAME', count(studentcourse.courseId) as '#_student'
+from facultycourse
+right join course
+on facultycourse.courseId = course.id
+join studentcourse
+on studentcourse.courseId = course.id
+where facultycourse.courseId is null
+group by studentcourse.courseId
+order by count(studentcourse.courseId) DESC;
+
+/*Part D*/
+
+select count(startdate) as 'Students',DATE_FORMAT(startdate,'%Y') as 'YEAR'
+from studentcourse
+group by DATE_FORMAT(startdate,'%Y-%m')
+order by DATE_FORMAT(startdate,'%Y-%m') ASC;
+
+/*Part E*/
+
+select DATE_FORMAT(startdate,'%d-AUG-%y') as 'Start Date',
+count(startdate) as '# of Students'
+from studentcourse
+where startdate like '%08-__'
+group by DATE_FORMAT(startdate,'%Y-%m')
+order by DATE_FORMAT(startdate,'%Y-%m') ASC;
+
+/*Part F*/
+
+select student.firstname as 'First Name',
+student.lastname as 'Last Name',
+count(course.id) as 'Number of Courses'
+from student
+join studentcourse 
+on student.id = studentcourse.studentId
+join course
+on studentcourse.courseId = course.id
+where student.majorId = course.deptId
+group by student.id
+order by count(course.id) ASC, student.lastname ASC;
+
+/*Part G*/
+
+select firstName, lastname, 
+round(AVG(progress),1) as 'Average Progress'
+from student
+join studentcourse
+on student.id = studentcourse.studentId
+group by student.id
+having AVG(progress) < 50
+order by AVG(progress) DESC;
+
+/*Part H Part 1*/
+
+select course.name as 'Course Name', AVG(progress) as 'Average Progress'
+from course
+join studentcourse
+on course.id = studentcourse.courseId
+group by course.id
+order by AVG(progress) DESC;
+
+/*Part H Part 2*/
+
+select AVG(progress)
+from course
+join studentcourse
+on course.id = studentcourse.courseId
+group by course.id
+order by AVG(progress) DESC limit 1;
+
+/*Part H Part 3*/
+
+select faculty.firstname as 'First Name',
+faculty.lastname as 'Last Name',
+AVG(progress) as 'Average Progress'
+from faculty
+join facultyCourse
+on faculty.id = facultyCourse.facultyID
+join course
+on facultyCourse.courseID = course.id
+join studentcourse
+on studentcourse.courseid = course.id
+group by faculty.id
+order by AVG(progress) ASC;
+
+/*Part H Part 4*/
+
+select faculty.firstname as 'First Name',
+faculty.lastname as 'Last Name',
+AVG(progress) as 'Average Progress'
+from faculty
+join facultyCourse
+on faculty.id = facultyCourse.facultyID
+join course
+on facultyCourse.courseID = course.id
+join studentcourse
+on studentcourse.courseid = course.id
+group by faculty.id
+having AVG(progress) >= (
+select (AVG(progress)*0.9)
+from faculty
+join facultyCourse
+on faculty.id = facultyCourse.facultyID
+join course
+on facultyCourse.courseID = course.id
+join studentcourse
+on studentcourse.courseid = course.id
+group by faculty.id
+order by AVG(progress) DESC limit 1)
+order by AVG(progress) DESC;
+
+/*Part I*/
+
+select firstname, lastname,
+CASE
+	when min(studentcourse.progress) < 40 THEN "F"
+	when min(studentcourse.progress) < 50 AND min(studentcourse.progress) >= 40 THEN "D"
+	when min(studentcourse.progress) < 60 AND min(studentcourse.progress) >= 50 THEN "C"
+	when min(studentcourse.progress) < 70 AND min(studentcourse.progress) >= 60 THEN "B"
+	when min(studentcourse.progress) >= 70 THEN "A"
+	else "-"
+end as MinGrade,
+CASE
+	when max(studentcourse.progress) < 40 THEN "F"
+	when max(studentcourse.progress) < 50 AND max(studentcourse.progress) >= 40 THEN "D"
+	when max(studentcourse.progress) < 60 AND max(studentcourse.progress) >= 50 THEN "C"
+	when max(studentcourse.progress) < 70 AND max(studentcourse.progress) >= 60 THEN "B"
+	when max(studentcourse.progress) >= 70 THEN "A"
+	else "-"
+end as MaxGrade
+from student
+join studentcourse
+on student.id = studentcourse.studentId
+group by student.id
+order by AVG(progress);
+
+/*Part J*/
+
+select CONCAT_WS(' ',firstName,lastname) as 'Student Name' 
+from student
+join studentcourse
+on student.id = studentcourse.studentId
+where progress < (select avg(progress)
+from student
+join studentcourse
+on student.id = studentcourse.studentId)
+group by student.id
+order by CONCAT_WS(' ',firstName,lastname) ASC;
