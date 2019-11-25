@@ -1,0 +1,60 @@
+/*
+A regular expression, regex or regexp is a sequence of characters that define a search pattern.
+Usually such patterns are used by string searching algorithms for "find" or "find and replace" 
+operations on strings,or for input validation.
+*/
+
+//You are able to search though a string and find a specific string through the use of the Matcher and Pattern class. 
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class JavaBasics {
+
+	public static void main(String[] args) {
+  
+    //Create a Pattern object by providing the pattern to be found.
+		Pattern pattern = Pattern.compile("found");
+    
+    //String that will contain the pattern we are looking for.
+		String sample = "sdffdsfoundsdfljkjsdfoundsdklfoweirufoundcvb";
+    
+    //Create matcher from the pattern object. Feed it the data you want to search through.
+		Matcher matcher = pattern.matcher(sample);
+
+    //Code that will be performed every time the pattern is found
+		while (matcher.find()) {
+			System.out.println("Found one!");
+		}
+	}
+}
+
+
+/********************************************************************************************************************************/
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class JavaBasics {
+
+	public static void main(String[] args) {
+  
+		String[] names = {"Dan","Stanley","Mary","Jananee",
+				"Sarah","Danny","Sonia","Ann"};
+        
+		/* We will search for all names that include the
+		 pattern "an" or "An" */
+		String regExp = "^.*[Aa]n.*$";
+    
+		Pattern pattern = Pattern.compile(regExp);
+    
+		for (String s : names) {
+			Matcher matcher = pattern.matcher(s);
+			if (matcher.find()) {
+				System.out.println("Match! " + s);
+        
+			}
+      
+		}
+	}
+}
