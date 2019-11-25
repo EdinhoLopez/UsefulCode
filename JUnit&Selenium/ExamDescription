@@ -1,0 +1,64 @@
+JUnit Skill-Based Assessment
+
+1. Test the following methods of the String class: length(), equalsIgnoreCase(String), contentEquals(String Builder), 
+charAt(int), contains(String), startsWith(String), startsWith(String, int), endsWith(String), substring(int, int) 
+and toLowerCase(). Use at least four different JUnit assert methods. Use the test string 
+"Per Scholas - 211 N Ervay St. #700 - Dallas, TX75201".
+
+2. Test the following methods of the String class: split(reg exp), join(delim, array).
+
+3. Test the following methods of the Integer class: toBinaryString(int).
+
+4. Create a test suite to run the test classes in #1,2,3.
+
+5. Test the ListMapClass using Hamcrest matchers. Run at least 3 assert methods for each ListMapClass method.
+At least one of the assert methods for the User list and map should test for the contents 
+of a User object and you should demonstrate the use of at least 3 String matchers. Create the custom 
+exception InvalidPasswordException which should extend IllegalArgumentException.
+ListMapClass.javaPreview the document
+User.javaPreview the document
+
+6. Write a parameterized test to test the constraints and calculateCredits method of the User class.
+
+7. Write a parameterized test to test the AddVaryingTypeCalculator class. Test for String, Character, Integer and Double types,
+as well as for illegal arguments. Create at least 4 sets of data and test for at least two situations that may throw an exception.
+Data arrays should resemble { num1, num2, expectedAnswer, expectedException }.
+AddVaryingTypeCalculator.javaPreview the document
+
+8. Demonstrate the use of a mock object to instantiate the Product abstract class.  Test one of the methods.
+Product-1.javaPreview the document
+
+9. Test Fixtures, Assume: Use the User class from item #5. Set up the pom.xml file with MariaDB, JUnit, and Hamcrest dependencies.
+Create a users table in MariaDB with matching columns. Create a User DAO class to perform all of the CRUD operations. 
+Create a test class to test the DAO. The DAO class should include one method that returns a list. Use the @BeforeClass method to set up
+the database and test the connection. Test each of CRUD methods. Use the “assumeThat” method in each of the test methods to confirm that
+the database is connected. You will need to insert some records for some of the operations and then delete any test 
+data after the test is completed. Use at least 4 different JUnit assert statements and 5 different Hamcrest matchers.
+
+10. Categories:
+^Use the three test classes provided below: SchoolTests, StudentTests and InstructorTests.
+^Assign the category “Semester” to the following test methods:
+--School - addCourseTest(), registerStudentTest() and publishGradesTest()
+--Student - joinClubTest()
+--Instructor - submitFinalGradesTest() and adviseStudentTest()
+^Assign the category "Weekly" to the following test methods:
+--School - createWeeklyReportTest()
+--Student - submitExamTest()
+--Instructor - gradeExamTest()
+^Assign the category "Daily" to the following test methods:
+--School - takeAttendanceTest()
+--Student - submitAssignmentTest()
+--Instructor - gradeAssignmentTest()
+^Create three test suites:
+--A test suite that will run all of the tests
+--A suite that will exclude the Daily tests
+--A suite that will run only the Weekly tests.
+CategoriesTestClasses.zip
+
+
+Bonus:
+Modify the test for AddVaryingTypeCalculator to allow for varying number of added items (i.e., more than two added numbers).
+Write a method that converts LocalDateTime to Timestamp and the reverse.
+Export your MariaDB table to a .sql file and place it in a folder with a copy of your JUnit SBA project. 
+Compress the folder and upload the .zip file to Canvas. Include your name as part of the folder name such
+as JUnit_SBA_lastname_firstname.
